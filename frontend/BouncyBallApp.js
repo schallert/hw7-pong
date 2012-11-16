@@ -29,22 +29,29 @@ Pong.prototype.initCanvas = function(){
 };
 
 Pong.prototype.initBall = function(){
-    this.ball = new Ball({'x': this.width/2, 'y': this.height/2,
-                            'radius': 7,
-                            'maxX': this.width, 'maxY': this.height});
+    this.ball = new Ball({
+        x: this.width/2, 
+        y: this.height/2,
+        radius: 7,
+        maxX: this.width, 
+        maxY: this.height,
+        style: "white"
+    });
     this.ball.velx = 3;
     this.ball.vely = 3;
 }
 
 Pong.prototype.initLeftPaddle = function(){
     this.leftPaddle = new Paddle({
-        "x" : 10,
+        x : 0,
+        style: "white"
     });
 }
 
 Pong.prototype.initRightPaddle = function(){
     this.rightPaddle = new Paddle({
-        "x" : 450,
+        "x" : 465,
+        style: "white"
     });
 }
 
@@ -68,7 +75,7 @@ Pong.prototype.draw = function(timeDiff){
 }
 
 Pong.prototype.clearPage = function(){
-    this.page.fillRect(0, 0, this.width, this.height, '#eee');
+    this.page.fillRect(0, 0, this.width, this.height, 'black');
 }
 
 Pong.prototype.drawBall = function(timeDiff){
@@ -104,12 +111,12 @@ Pong.prototype.updateGame = function(){
     var left = this.leftPaddle.x + this.leftPaddle.width - (this.ball.x - this.ball.radius)
     var right = this.ball.x + this.ball.radius - (this.rightPaddle.x)
 
-    if ((left >= 0 && left <= buffer) 
+    if ((left >= 0) 
         && (this.ball.y >= this.leftPaddle.y && this.ball.y <= this.leftPaddle.y + this.leftPaddle.height))
-        this.ball.velx *= -1
+        this.ball.velx *= -1*(this.ball.dampening);
 
-    if((right >= 0 && right <= buffer)
+    if((right >= 0)
         && (this.ball.y >= this.rightPaddle.y && this.ball.y <= this.leftPaddle.y + this.leftPaddle.height))
-        this.ball.velx *= -1
+        this.ball.velx *= -1*(this.ball.dampening);
 
 }
