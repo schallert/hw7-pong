@@ -17,9 +17,10 @@ var app = express()
   , io = require('socket.io').listen(server);
 
 
+io.set('log level', 0);
 io.sockets.on('connection', function (socket) {
-  socket.on('message', function (data) {
-    // console.log(data);
+  socket.on('clientUpdate', function (data) {
+    io.sockets.emit('displayUpdate', data);
   });
 });
 
@@ -31,7 +32,7 @@ app.configure(function(){
   app.use(express.logger('dev'));
   app.use(express.cookieParser());
   app.use(express.bodyParser());
-  app.use(express.session({ secret: 'keyboard cat' }));
+  app.use(express.session({ secret: 'ITZ A SECRETZ' }));
   app.use(flash());
   app.use(express.methodOverride());
   app.use(passport.initialize());
@@ -46,6 +47,7 @@ app.configure('development', function(){
 
 app.get('/', routes.index);
 app.get('/client', routes.client);
+app.get('/display', routes.display);
 
 // User control
 app.get('/login', user.loginGet);

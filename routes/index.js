@@ -4,5 +4,8 @@ module.exports = {
   },
   client: function (req, res) {
     res.render('client');
+  },
+  display: function (req, res) {
+    res.render('display');
   }
 }
