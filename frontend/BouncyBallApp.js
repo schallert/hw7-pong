@@ -1,4 +1,4 @@
-var BouncyBallApp = function(){
+var Pong = function(){
     this.setup();
     window.util.deltaTimeRequestAnimationFrame(this.draw.bind(this));
 }
@@ -7,7 +7,7 @@ var BouncyBallApp = function(){
 //SETUP
 //==============================================
 
-BouncyBallApp.prototype.setup = function(){
+Pong.prototype.setup = function(){
     window.util.patchRequestAnimationFrame();
     window.util.patchFnBind();
     this.initCanvas();
@@ -18,7 +18,7 @@ BouncyBallApp.prototype.setup = function(){
     this.initAccelerometer();
 }
 
-BouncyBallApp.prototype.initCanvas = function(){
+Pong.prototype.initCanvas = function(){
     this.body = $(document.body);
     this.body.width(document.body.offsetWidth);
     this.body.height(window.innerHeight - 20);
@@ -28,7 +28,7 @@ BouncyBallApp.prototype.initCanvas = function(){
     this.page = new ScaledPage(this.canvas, this.width);
 };
 
-BouncyBallApp.prototype.initBall = function(){
+Pong.prototype.initBall = function(){
     this.ball = new Ball({'x': this.width/2, 'y': this.height/2,
                             'radius': 10,
                             'maxX': this.width, 'maxY': this.height});
@@ -36,19 +36,19 @@ BouncyBallApp.prototype.initBall = function(){
     this.ball.vely = 5;
 }
 
-BouncyBallApp.prototype.initLeftPaddle = function(){
+Pong.prototype.initLeftPaddle = function(){
     this.leftPaddle = new Paddle({
         "x" : 10,
     });
 }
 
-BouncyBallApp.prototype.initRightPaddle = function(){
+Pong.prototype.initRightPaddle = function(){
     this.rightPaddle = new Paddle({
         "x" : 450,
     });
 }
 
-BouncyBallApp.prototype.initAccelerometer = function(){
+Pong.prototype.initAccelerometer = function(){
     this.accelerometer = new Accelerometer();
     this.accelerometer.startListening();
 }
@@ -57,42 +57,59 @@ BouncyBallApp.prototype.initAccelerometer = function(){
 //DRAWING
 //==============================================
 
-BouncyBallApp.prototype.draw = function(timeDiff){
+Pong.prototype.draw = function(timeDiff){
     this.clearPage();
     this.drawBall(timeDiff);
     this.drawLeftPaddle(timeDiff);
     this.drawRightPaddle(timeDiff);
     //TouchHandler.drawBalls(timeDiff);
     this.updateBall();
+    this.updateGame();
 }
 
-BouncyBallApp.prototype.clearPage = function(){
+Pong.prototype.clearPage = function(){
     this.page.fillRect(0, 0, this.width, this.height, '#eee');
 }
 
-BouncyBallApp.prototype.drawBall = function(timeDiff){
+Pong.prototype.drawBall = function(timeDiff){
     this.ball.update(timeDiff);
     this.ball.draw(this.page);
 }
 
-BouncyBallApp.prototype.updateBall = function(){
+Pong.prototype.updateBall = function(){
     var lastAcceleration = this.accelerometer.getLast();
     this.ball.velx += lastAcceleration.x/8;
     this.ball.vely += lastAcceleration.y/8;
 
 }
 
-BouncyBallApp.prototype.drawLeftPaddle = function(timeDiff) {
+Pong.prototype.drawLeftPaddle = function(timeDiff) {
     this.leftPaddle.update(timeDiff);
     this.leftPaddle.draw(this.page);
 };
 
-BouncyBallApp.prototype.drawRightPaddle = function(timeDiff) {
+Pong.prototype.drawRightPaddle = function(timeDiff) {
     this.rightPaddle.update(timeDiff);
     this.rightPaddle.draw(this.page);
 };
 
-BouncyBallApp.prototype.updateLeftPaddle = function() {
+Pong.prototype.updateLeftPaddle = function() {
 };
-BouncyBallApp.prototype.updateRightPaddle = function() {
+Pong.prototype.updateRightPaddle = function() {
 };
+
+Pong.prototype.updateGame = function(){
+    var buffer = 4;
+    //If behind the left paddle
+    var left = this.leftPaddle.x + this.leftPaddle.width - (this.ball.x - this.ball.radius)
+    var right = this.ball.x + this.ball.radius - (this.rightPaddle.x)
+
+    if ((left >= 0 && left <= buffer) 
+        && (this.ball.y >= this.leftPaddle.y && this.ball.y <= this.leftPaddle.y + this.leftPaddle.height))
+        this.ball.velx *= -1
+
+    if((right >= 0 && right <= buffer)
+        && (this.ball.y >= this.rightPaddle.y && this.ball.y <= this.leftPaddle.y + this.leftPaddle.height))
+        this.ball.velx *= -1
+
+}

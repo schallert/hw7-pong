@@ -15,7 +15,6 @@ Accelerometer.prototype.startListening = function(){
         this.startListeningDeviceOrientation();
     }
     else {
-        alert('no accelerometer detected! (try arrow keys)');
         this.startListeningKeys();
     }
 }
@@ -41,7 +40,6 @@ Accelerometer.prototype.startListeningDeviceMotion = function(){
     }.bind(this));
     setTimeout(function(){
         if (timesEventFired <= 3){
-            alert('no accelerometer detected! (try arrow keys)');
             this.startListeningKeys();
         }
         else
@@ -73,7 +71,6 @@ Accelerometer.prototype.startListeningDeviceOrientation = function(){
     }.bind(this));
     setTimeout(function(){
         if (timesEventFired <= 3){
-            alert('no accelerometer detected! (try arrow keys)');
             this.startListeningKeys();
         }
         else
