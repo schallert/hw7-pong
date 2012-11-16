@@ -1,6 +1,7 @@
 extends layout
 
 block content
-  h1 Client
+  h1 Client: 
+    span(id="clientName") #{user.username}
   script(src='/javascripts/Accelerometer.js')
   script(src='/javascripts/client.js')

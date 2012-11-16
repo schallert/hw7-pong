@@ -19,8 +19,11 @@ var app = express()
 
 io.set('log level', 0);
 io.sockets.on('connection', function (socket) {
-  socket.on('clientUpdate', function (data) {
-    io.sockets.emit('displayUpdate', data);
+  socket.on('clientUpdate_bob', function (data) {
+    io.sockets.emit('displayUpdate_bob', data);
+  });
+  socket.on('clientUpdate_joe', function (data) {
+    io.sockets.emit('displayUpdate_joe', data);
   });
 });
 
@@ -46,7 +49,7 @@ app.configure('development', function(){
 });
 
 app.get('/', routes.index);
-app.get('/client', routes.client);
+app.get('/client', ensureAuthenticated, routes.client);
 app.get('/display', routes.display);
 
 // User control
@@ -56,6 +59,11 @@ app.post('/login',
   user.loginPost
 );
 app.get('/logout', user.logout);
+
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) { return next(); }
+  res.redirect('/login')
+}
 
 // Fire it up
 server.listen(app.get('port'));

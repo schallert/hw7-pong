@@ -4,7 +4,7 @@ module.exports = {
   setupPassport: function (passport) {
     var users = [
         { id: 1, username: 'bob', password: 'secret', email: 'bob@example.com' }
-      , { id: 2, username: 'joe', password: 'birthday', email: 'joe@example.com' }
+      , { id: 2, username: 'joe', password: 'secret', email: 'joe@example.com' }
     ];
 
     function findById(id, fn) {

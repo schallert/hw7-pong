@@ -3,7 +3,7 @@ module.exports = {
     res.render('login', { user: req.user, message: req.flash('error') });
   },
   loginPost: function (req, res) {
-    res.redirect('/');
+    res.redirect('/client');
   },
   logout: function (req, res) {
     req.logout();
