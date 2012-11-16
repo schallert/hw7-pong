@@ -28,10 +28,22 @@ BouncyBallApp.prototype.initCanvas = function(){
 
 BouncyBallApp.prototype.initBall = function(){
     this.ball = new Ball({'x': this.width/2, 'y': this.height/2,
-                            'radius': 20,
+                            'radius': 10,
                             'maxX': this.width, 'maxY': this.height});
     this.ball.velx = 5;
     this.ball.vely = 5;
+}
+
+BouncyBallApp.prototype.initLeftPaddle = function(){
+    this.leftPaddle = new Paddle({
+        "x" : 10,
+    });
+}
+
+BouncyBallApp.prototype.initRightPaddle = function(){
+    this.rightPaddle = new Paddle({
+        "x" : 10,
+    });
 }
 
 BouncyBallApp.prototype.initAccelerometer = function(){

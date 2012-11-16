@@ -3,7 +3,7 @@ var Ball = function(config){
     this.style = config.style || 'blue';
     this.radius = config.radius;
 
-    this.damping = config.damping || 1.5;
+    this.damping = config.damping || 0.99;
 
     this.x = config.x;
     this.y = config.y;
