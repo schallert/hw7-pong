@@ -1,9 +1,11 @@
 var Paddle = function(config){
     this.style = config.style || 'blue';
-    this.radius = config.radius;
 
-    this.x = config.x || 120;
-    this.y = config.y || 40;
+    this.height = config.height || 120;
+    this.width = config.width || 40;
+
+    this.x = config.x;
+    this.y = config.y || 120; //Start in the middle of the screen.
     
     this.velx = 0;
     this.vely = 0;
@@ -11,31 +13,24 @@ var Paddle = function(config){
     this.maxX = config.maxX;
     this.maxY = config.maxY;
 
+    this.damping = config.damping || 1.5;
 }
 
 Paddle.prototype.update = function(timeDiff){
-    this.x += this.velx*timeDiff/20;
-    this.y += this.vely*timeDiff/20;
+    //We only update Y axis, as they are paddles and need to stay at the edge.
+    this.y += this.vely*timeDiff/20; 
 
-    if (this.x - this.radius < 0){
-        this.x = this.radius;
+    if (this.x < 0){
+        this.x = 0;
         this.velx = -this.velx/this.damping;
     }
-    else if(this.x + this.radius > this.maxX){
-        this.x = this.maxX - this.radius;
+    else if(this.x + this.height > this.maxX){
+        this.x = this.maxX - this.height;
         this.velx = -this.velx/this.damping;
-    }
-    if (this.y - this.radius < 0){
-        this.y = this.radius;
-        this.vely = -this.vely/this.damping;
-    }
-    else if (this.y + this.radius > this.maxY){
-        this.y = this.maxY - this.radius;
-        this.vely = -this.vely/this.damping;
     }
 }
 
 Paddle.prototype.draw = function(scaledPage){
-    scaledPage.fillCircle(this.x, this.y, this.radius, this.style);
+    scaledPage.fillRectangle(this.x, this.y, this.width, this.height, this.style);
 }
 
