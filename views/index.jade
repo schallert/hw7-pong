@@ -1,12 +1,17 @@
 extends layout
 
 block content
-  - if (user)
-      p Logged in as #{user.username}
-      p Click 
-        a(href='/logout') here
-        |  to log out
-  - else
-      p Click 
-        a(href='/login') here
-        |  to log in
+  //- - if (user)
+  //-     p Logged in as #{user.username}
+  //-     p Click 
+  //-       a(href='/logout') here
+  //-       |  to log out
+  //-     button(id='doShit') Emit shit
+  //- - else
+  //-     p Click 
+  //-       a(href='/login') here
+  //-       |  to log in
+  p
+    a(href='/client') Client
+  p
+    a(href='/display') Display

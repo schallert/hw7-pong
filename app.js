@@ -12,7 +12,16 @@ var express = require('express')
 // Initialize passport with all the shit we need
 myUtil.setupPassport(passport);
 
-var app = express();
+var app = express()
+  , server = http.createServer(app)
+  , io = require('socket.io').listen(server);
+
+
+io.sockets.on('connection', function (socket) {
+  socket.on('message', function (data) {
+    // console.log(data);
+  });
+});
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
@@ -36,6 +45,7 @@ app.configure('development', function(){
 });
 
 app.get('/', routes.index);
+app.get('/client', routes.client);
 
 // User control
 app.get('/login', user.loginGet);
@@ -46,5 +56,5 @@ app.post('/login',
 app.get('/logout', user.logout);
 
 // Fire it up
-app.listen(app.get('port'));
+server.listen(app.get('port'));
 console.log("Express server listening on port " + app.get('port'));

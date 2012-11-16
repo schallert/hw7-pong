@@ -1,8 +1,8 @@
-
-/*
- * GET home page.
- */
-
-exports.index = function(req, res){
-  res.render('index', { title: 'Express', user: req.user });
-};
+module.exports = {
+  index: function (req, res){
+    res.render('index', { title: 'Express', user: req.user });
+  },
+  client: function (req, res) {
+    res.render('client');
+  }
+}
