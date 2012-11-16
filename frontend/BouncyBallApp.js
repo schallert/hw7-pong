@@ -12,6 +12,8 @@ BouncyBallApp.prototype.setup = function(){
     window.util.patchFnBind();
     this.initCanvas();
     TouchHandler.init(this);
+    this.initLeftPaddle();
+    this.initRightPaddle();
     this.initBall();
     this.initAccelerometer();
 }
@@ -42,7 +44,7 @@ BouncyBallApp.prototype.initLeftPaddle = function(){
 
 BouncyBallApp.prototype.initRightPaddle = function(){
     this.rightPaddle = new Paddle({
-        "x" : 10,
+        "x" : 450,
     });
 }
 
@@ -58,7 +60,9 @@ BouncyBallApp.prototype.initAccelerometer = function(){
 BouncyBallApp.prototype.draw = function(timeDiff){
     this.clearPage();
     this.drawBall(timeDiff);
-    TouchHandler.drawBalls(timeDiff);
+    this.drawLeftPaddle(timeDiff);
+    this.drawRightPaddle(timeDiff);
+    //TouchHandler.drawBalls(timeDiff);
     this.updateBall();
 }
 
@@ -77,3 +81,18 @@ BouncyBallApp.prototype.updateBall = function(){
     this.ball.vely += lastAcceleration.y/8;
 
 }
+
+BouncyBallApp.prototype.drawLeftPaddle = function(timeDiff) {
+    this.leftPaddle.update(timeDiff);
+    this.leftPaddle.draw(this.page);
+};
+
+BouncyBallApp.prototype.drawRightPaddle = function(timeDiff) {
+    this.rightPaddle.update(timeDiff);
+    this.rightPaddle.draw(this.page);
+};
+
+BouncyBallApp.prototype.updateLeftPaddle = function() {
+};
+BouncyBallApp.prototype.updateRightPaddle = function() {
+};

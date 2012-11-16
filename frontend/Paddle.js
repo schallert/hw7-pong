@@ -2,7 +2,7 @@ var Paddle = function(config){
     this.style = config.style || 'blue';
 
     this.height = config.height || 120;
-    this.width = config.width || 40;
+    this.width = config.width || 20;
 
     this.x = config.x;
     this.y = config.y || 120; //Start in the middle of the screen.
@@ -31,6 +31,6 @@ Paddle.prototype.update = function(timeDiff){
 }
 
 Paddle.prototype.draw = function(scaledPage){
-    scaledPage.fillRectangle(this.x, this.y, this.width, this.height, this.style);
+    scaledPage.fillRect(this.x, this.y, this.width, this.height, this.style);
 }
 
