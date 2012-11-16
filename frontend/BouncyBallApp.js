@@ -30,10 +30,10 @@ Pong.prototype.initCanvas = function(){
 
 Pong.prototype.initBall = function(){
     this.ball = new Ball({'x': this.width/2, 'y': this.height/2,
-                            'radius': 10,
+                            'radius': 7,
                             'maxX': this.width, 'maxY': this.height});
-    this.ball.velx = 5;
-    this.ball.vely = 5;
+    this.ball.velx = 3;
+    this.ball.vely = 3;
 }
 
 Pong.prototype.initLeftPaddle = function(){

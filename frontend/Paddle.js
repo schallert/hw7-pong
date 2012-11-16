@@ -1,8 +1,8 @@
 var Paddle = function(config){
     this.style = config.style || 'blue';
 
-    this.height = config.height || 120;
-    this.width = config.width || 20;
+    this.height = config.height || 80;
+    this.width = config.width || 15;
 
     this.x = config.x;
     this.y = config.y || 120; //Start in the middle of the screen.
