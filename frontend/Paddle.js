@@ -1,4 +1,5 @@
 var Paddle = function(config){
+    
     this.style = config.style || 'blue';
 
     this.height = config.height || 80;

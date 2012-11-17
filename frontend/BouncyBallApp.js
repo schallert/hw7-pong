@@ -109,8 +109,26 @@ Pong.prototype.updateGame = function(){
     var ctx = this.page.page;
     ctx.font = "50px sans-serif";
 
-    ctx.fillText(this.ball.leftScore, this.ball.maxX/2 * this.page.scale - 25, 100);
-    ctx.fillText(this.ball.rightScore, this.ball.maxX/2 * this.page.scale + 25, 100);
+    var left = this.ball.leftScore;
+    var right = this.ball.rightScore;
+
+    ctx.fillText(left, this.ball.maxX/2 * this.page.scale - 25, 100);
+    ctx.fillText(right, this.ball.maxX/2 * this.page.scale + 25, 100);
+
+    if (left >=5 || right >= 5) {
+        this.page.page.fillStyle = "white";
+        this.page.fillRect(0, 0, this.width, this.height);
+        this.page.page.fillStyle = "black";
+        if (left >= 5) {
+            ctx.fillText("LEFT WINS!!!", this.ball.maxX/2 * this.page.scale * 0.3, 150);
+        }
+
+        else if (right >= 5) {
+            ctx.fillText("RIGHT WINS!!!", this.ball.maxX/2 * this.page.scale * 0.3, 150);            
+        }
+
+
+    }
 
     var buffer = 4;
     //If behind the left paddle
