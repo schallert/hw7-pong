@@ -11,6 +11,9 @@ var Ball = function(config){
     this.velx = 0;
     this.vely = 0;
 
+    this.leftScore = 0;
+    this.rightScore = 0;
+
     this.maxX = config.maxX;
     this.maxY = config.maxY;
 
@@ -49,9 +52,11 @@ Ball.prototype.update = function(timeDiff){
 
     if (this.x - this.radius < 0){
         this.newBall();
+        this.rightScore++;
     }
     else if(this.x + this.radius > this.maxX){
         this.newBall();
+        this.leftScore++;
     }
     if (this.y - this.radius < 0){
         this.y = this.radius;

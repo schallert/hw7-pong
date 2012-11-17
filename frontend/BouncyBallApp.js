@@ -106,6 +106,12 @@ Pong.prototype.updateRightPaddle = function() {
 };
 
 Pong.prototype.updateGame = function(){
+    var ctx = this.page.page;
+    ctx.font = "50px sans-serif";
+
+    ctx.fillText(this.ball.leftScore, this.ball.maxX/2 * this.page.scale - 25, 100);
+    ctx.fillText(this.ball.rightScore, this.ball.maxX/2 * this.page.scale + 25, 100);
+
     var buffer = 4;
     //If behind the left paddle
     var left = this.leftPaddle.x + this.leftPaddle.width - (this.ball.x - this.ball.radius)
