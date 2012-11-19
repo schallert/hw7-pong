@@ -1,22 +1,12 @@
 extends layout
 
 block content
-  h1 Display
 
-  h2 Bob
-  p x: 
-    span(id="xCoordBob")
-  p y: 
-    span(id="yCoordBob")
-  p z: 
-    span(id="zCoordBob")
-
-  h2 Joe
-  p x: 
-    span(id="xCoordJoe")
-  p y: 
-    span(id="yCoordJoe")
-  p z: 
-    span(id="zCoordJoe")
-
-  script(src='/javascripts/display.js')
+    script(src='/javascripts/Ball.js')
+    script(src='/javascripts/Paddle.js')
+    script(src='/javascripts/ScaledPage.js')
+    script(src='/javascripts/Accelerometer.js')
+    script(src='/javascripts/Util.js')
+    script(src='/javascripts/TouchHandler.js')
+    script(src='/javascripts/BouncyBallApp.js')
+    script(src='/javascripts/display.js')
