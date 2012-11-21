@@ -1,4 +1,10 @@
 console.log("loaded");
+var Game = {};
+$(document).ready(function(){
+	console.log("hi");
+	Game = new Pong();
+})
+
 socket.on('displayUpdate_bob', function (coords) {
   /*$("#xCoordBob").text(coords.x);
   $("#yCoordBob").text(coords.y);

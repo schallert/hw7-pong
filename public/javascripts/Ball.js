@@ -70,7 +70,6 @@ Ball.prototype.update = function(timeDiff){
     }
     if(this.velx > this.maxSpeed) this.velx = this.maxSpeed;
     if(this.vely > this.maxSpeed) this.vely = this.maxSpeed;
-    console.log(this.velx);
 }
 
 Ball.prototype.draw = function(scaledPage){

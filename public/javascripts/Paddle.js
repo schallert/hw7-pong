@@ -12,7 +12,7 @@ var Paddle = function(config){
     this.vely = 0;
 
     this.maxX = config.maxX;
-    this.maxY = config.maxY;
+    this.maxY = config.maxY || 320;
 
     this.damping = config.damping || 1.5;
 }
@@ -21,13 +21,13 @@ Paddle.prototype.update = function(timeDiff){
     //We only update Y axis, as they are paddles and need to stay at the edge.
     this.y += this.vely*timeDiff/20; 
 
-    if (this.x < 0){
-        this.x = 0;
-        this.velx = -this.velx/this.damping;
+    if (this.y < 0){
+        this.y = 0;
+        this.vely = -this.vely/this.damping;
     }
-    else if(this.x + this.height > this.maxX){
-        this.x = this.maxX - this.height;
-        this.velx = -this.velx/this.damping;
+    else if(this.y + this.height > this.maxY){
+        this.y = this.maxY - this.height;
+        this.vely = -this.vely/this.damping;
     }
 }
 

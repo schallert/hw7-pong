@@ -44,14 +44,17 @@ Pong.prototype.initBall = function(){
 Pong.prototype.initLeftPaddle = function(){
     this.leftPaddle = new Paddle({
         x : 0,
-        style: "white"
+        style: "white",
+        maxX: 320
     });
 }
 
 Pong.prototype.initRightPaddle = function(){
     this.rightPaddle = new Paddle({
         "x" : 465,
-        style: "white"
+        style: "white",
+        maxX: 320
+
     });
 }
 
@@ -69,7 +72,6 @@ Pong.prototype.draw = function(timeDiff){
     this.drawBall(timeDiff);
     this.drawLeftPaddle(timeDiff);
     this.drawRightPaddle(timeDiff);
-    //TouchHandler.drawBalls(timeDiff);
     this.updateBall();
     this.updateGame();
 }
@@ -100,9 +102,11 @@ Pong.prototype.drawRightPaddle = function(timeDiff) {
     this.rightPaddle.draw(this.page);
 };
 
-Pong.prototype.updateLeftPaddle = function() {
+Pong.prototype.updateLeftPaddle = function(i) {
+    this.leftPaddle.vely = i;
 };
 Pong.prototype.updateRightPaddle = function() {
+    this.rightPaddle.vely = il
 };
 
 Pong.prototype.updateGame = function(){
@@ -136,15 +140,19 @@ Pong.prototype.updateGame = function(){
     var right = this.ball.x + this.ball.radius - (this.rightPaddle.x)
 
     if ((left >= 0) 
-        && (this.ball.y >= this.leftPaddle.y && this.ball.y <= this.leftPaddle.y + this.leftPaddle.height))
+        && (this.ball.y >= this.leftPaddle.y && this.ball.y <= this.leftPaddle.y + this.leftPaddle.height)){
         this.ball.velx *= -1*(this.ball.dampening);
+        this.ball.vely += this.leftPaddle.vely;
+    }
 
-    if((right >= 0)
-        && (this.ball.y >= this.rightPaddle.y && this.ball.y <= this.leftPaddle.y + this.leftPaddle.height))
+
+    else if((right >= 0)
+        && (this.ball.y >= this.rightPaddle.y && this.ball.y <= this.leftPaddle.y + this.leftPaddle.height)){
         this.ball.velx *= -1*(this.ball.dampening);
+        this.ball.vely += this.rightPaddle.vely;
+    }
 
 }
 
-window.onload = function(){
-    new Pong();
-}
+
+var Game = {};
