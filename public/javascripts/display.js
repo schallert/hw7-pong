@@ -6,13 +6,9 @@ $(document).ready(function(){
 })
 
 socket.on('displayUpdate_bob', function (coords) {
-  /*$("#xCoordBob").text(coords.x);
-  $("#yCoordBob").text(coords.y);
-  $("#zCoordBob").text(coords.z);*/
+  Game.updateLeftPaddle(coords.z * 1.5);
 });
 
 socket.on('displayUpdate_joe', function (coords) {
-  /*$("#xCoordJoe").text(coords.x);
-  $("#yCoordJoe").text(coords.y);
-  $("#zCoordJoe").text(coords.z);*/
+  Game.updateRightPaddle(coords.z * 1.5);
 });

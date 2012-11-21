@@ -105,8 +105,8 @@ Pong.prototype.drawRightPaddle = function(timeDiff) {
 Pong.prototype.updateLeftPaddle = function(i) {
     this.leftPaddle.vely = i;
 };
-Pong.prototype.updateRightPaddle = function() {
-    this.rightPaddle.vely = il
+Pong.prototype.updateRightPaddle = function(i) {
+    this.rightPaddle.vely = i;
 };
 
 Pong.prototype.updateGame = function(){
