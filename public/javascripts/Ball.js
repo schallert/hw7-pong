@@ -19,6 +19,8 @@ var Ball = function(config){
 
     this.dampening = 1.01;
 
+    this.maxSpeed = 12;
+
 }
 
 function genVel() {
@@ -66,8 +68,9 @@ Ball.prototype.update = function(timeDiff){
         this.y = this.maxY - this.radius;
         this.vely = -this.vely/this.damping;
     }
-    if(this.velx > 20) this.velx = 15;
-    if(this.vely > 20) this.vely = 15;
+    if(this.velx > this.maxSpeed) this.velx = this.maxSpeed;
+    if(this.vely > this.maxSpeed) this.vely = this.maxSpeed;
+    console.log(this.velx);
 }
 
 Ball.prototype.draw = function(scaledPage){
